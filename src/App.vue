@@ -1,28 +1,23 @@
 <template>
   <div id="app">
+    <nav-header></nav-header>
     <img src="./assets/logo.png">
-    <hello></hello>
+    <app-view></app-view>
+    <nav-footer></nav-footer>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
+import NavHeader from './components/NavHeader'
+import AppView from './components/AppView'
+import NavFooter from './components/NavFooter'
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
-    Hello
+    NavHeader,
+    AppView,
+    NavFooter
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
