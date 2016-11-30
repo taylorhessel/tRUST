@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav-header></nav-header>
-    <img src="./assets/logo.png">
+    <img src="./assets/images/logo.png">
     <app-view></app-view>
     <nav-footer></nav-footer>
   </div>
@@ -21,3 +21,5 @@ export default {
   }
 }
 </script>
+
+<style src="./assets/css/global.sass" lang="sass"></style>
