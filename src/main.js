@@ -4,9 +4,24 @@ import App from './app'
 
 Vue.use(VueRouter)
 
-/* eslint-disable no-new */
+const homeView = App.components.Index
+const routes = [
+  {path: '/', component: homeView}
+]
+const router = new VueRouter({
+  mode: 'history',
+  routes
+})
+
 new Vue({
-  el: '#app',
+  router,
   template: '<App/>',
   components: { App }
-})
+}).$mount('#app')
+
+/* eslint-disable no-new */
+// new Vue({
+//   el: '#app',
+//   template: '<App/>',
+//   components: { App }
+// })

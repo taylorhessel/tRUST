@@ -2,21 +2,21 @@
   <div id="app">
     <nav-header></nav-header>
     <img src="./assets/images/logo.png">
-    <app-view></app-view>
+    <router-view></router-view>
     <nav-footer></nav-footer>
   </div>
 </template>
 
 <script>
 import NavHeader from './components/NavHeader'
-import AppView from './components/AppView'
+import Index from './components/Index'
 import NavFooter from './components/NavFooter'
 
 export default {
   name: 'App',
   components: {
     NavHeader,
-    AppView,
+    Index,
     NavFooter
   }
 }
