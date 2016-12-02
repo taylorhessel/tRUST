@@ -1,5 +1,6 @@
 .DS_Store
-config/
+config/dev.env.js
+config/prod.env.js
 node_modules/
 dist/
 npm-debug.log
