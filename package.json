@@ -1,12 +1,13 @@
 {
   "name": "trust",
   "version": "1.0.0",
-  "description": "A Rust social networking web application",
+  "description": "a Rust social networking web application",
   "author": "Taylor Hessel <taylorhessel@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
+    "start": "node build/prod-server.js",
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
