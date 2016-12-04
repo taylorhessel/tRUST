@@ -1,10 +1,70 @@
-$font-stack:    Helvetica, sans-serif
-$primary-color: #333
+/* COLOR VARS */
+$black: hsla(224%, 14%, 22%, 1)
+$white: hsla(240%, 100%, 99%, 1)
+$secondary: hsla(257%, 100%, 93%, 1)
+$primary: hsla(228%, 46%, 28%, 1)
+$primary-dark: hsla(227%, 42%, 20%, 1)
+$rust: hsla(8%, 65%, 49%, 1)
 
-body
-  font: 100% $font-stack
-  color: $primary-color
+/* HEADER */
+header
+  position: relative
+  z-index: 1
+  font-family: 'Righteous', cursive
+  font-size: 2em
 
-.test
-  font-size: 48px
-  color: purple
+  a
+    color: $white
+
+/* INDEX VIEW */
+img.bg
+  min-height: 100%
+  min-width: 1440px
+  width: 100%
+  height: auto
+  position: fixed
+  top: 0
+  left: 0
+  z-index: -1
+
+.overlay
+  background-color: $primary
+  width: 100vw
+  height: 100vh
+  position: fixed
+  top: 0
+  left: 0
+  opacity: 0.3
+
+/* COLORS VIEW */
+.color-div
+    height: 200px
+
+.color-1
+  background-color: $black
+
+.color-2
+  background-color: $white
+
+.color-3
+  background-color: $secondary
+
+.color-4
+  background-color: $primary
+
+.color-5
+  background-color: $primary-dark
+
+.color-6
+  background-color: $rust
+
+/* FOOTER */
+footer
+  position: absolute
+  bottom: 0
+
+/* MEDIA QUERIES */
+@media screen and (max-width: 1024px)
+  img.bg
+    left: 50%
+    margin-left: -720px
