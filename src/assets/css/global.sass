@@ -5,16 +5,44 @@ $secondary: hsla(257%, 100%, 93%, 1)
 $primary: hsla(228%, 46%, 28%, 1)
 $primary-dark: hsla(227%, 42%, 20%, 1)
 $rust: hsla(8%, 65%, 49%, 1)
+$rust-dark: hsla(8%, 65%, 45%, 1)
 
 /* HEADER */
 header
   position: relative
   z-index: 1
-  font-family: 'Righteous', cursive
-  font-size: 2em
 
   a
     color: $white
+
+  .brand
+    display: block
+    line-height: 1.7
+    padding: .5em 0
+    font-size: 2.5em
+    font-family: 'Righteous', cursive
+    &:hover
+      text-decoration: none
+      color: $white
+
+  .ink-navigation
+    ul.menu.horizontal
+      li a
+        padding: 2.5em 1em
+        font-size: 1em
+        font-variant: small-caps
+        &:hover
+          text-decoration: none
+          color: $white
+      & li button
+        margin: 2.2em 0 2.2em 1em
+        background-color: $rust
+        border-color: $rust
+        color: $white
+        font-variant: small-caps
+        &:hover
+          background-color: $rust-dark
+          border-color: $rust-dark
 
 /* INDEX VIEW */
 img.bg
@@ -35,6 +63,34 @@ img.bg
   top: 0
   left: 0
   opacity: 0.3
+  z-index: 0
+
+.index-content
+  position: relative
+  z-index: 1
+
+  .marketing
+    margin: 4em
+
+    h1
+      color: $white
+
+    h2
+      color: $white
+
+    .button-wrapper
+      margin-top: 3em
+
+      button
+        font-variant: small-caps
+        font-size: 1.25em
+        padding: 10px 18px
+        background-color: $rust
+        border-color: $rust
+        color: $white
+        &:hover
+          background-color: $rust-dark
+          border-color: $rust-dark
 
 /* COLORS VIEW */
 .color-div
