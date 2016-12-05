@@ -1,10 +1,126 @@
-$font-stack:    Helvetica, sans-serif
-$primary-color: #333
+/* COLOR VARS */
+$black: hsla(224%, 14%, 22%, 1)
+$white: hsla(240%, 100%, 99%, 1)
+$secondary: hsla(257%, 100%, 93%, 1)
+$primary: hsla(228%, 46%, 28%, 1)
+$primary-dark: hsla(227%, 42%, 20%, 1)
+$rust: hsla(8%, 65%, 49%, 1)
+$rust-dark: hsla(8%, 65%, 45%, 1)
 
-body
-  font: 100% $font-stack
-  color: $primary-color
+/* HEADER */
+header
+  position: relative
+  z-index: 1
 
-.test
-  font-size: 48px
-  color: purple
+  a
+    color: $white
+
+  .brand
+    display: block
+    line-height: 1.7
+    padding: .5em 0
+    font-size: 2.5em
+    font-family: 'Righteous', cursive
+    &:hover
+      text-decoration: none
+      color: $white
+
+  .ink-navigation
+    ul.menu.horizontal
+      li a
+        padding: 2.5em 1em
+        font-size: 1em
+        font-variant: small-caps
+        &:hover
+          text-decoration: none
+          color: $white
+      & li button
+        margin: 2.2em 0 2.2em 1em
+        background-color: $rust
+        border-color: $rust
+        color: $white
+        font-variant: small-caps
+        &:hover
+          background-color: $rust-dark
+          border-color: $rust-dark
+
+/* INDEX VIEW */
+img.bg
+  min-height: 100%
+  min-width: 1440px
+  width: 100%
+  height: auto
+  position: fixed
+  top: 0
+  left: 0
+  z-index: -1
+
+.overlay
+  background-color: $primary
+  width: 100vw
+  height: 100vh
+  position: fixed
+  top: 0
+  left: 0
+  opacity: 0.3
+  z-index: 0
+
+.index-content
+  position: relative
+  z-index: 1
+
+  .marketing
+    margin: 4em
+
+    h1
+      color: $white
+
+    h2
+      color: $white
+
+    .button-wrapper
+      margin-top: 3em
+
+      button
+        font-variant: small-caps
+        font-size: 1.25em
+        padding: 10px 18px
+        background-color: $rust
+        border-color: $rust
+        color: $white
+        &:hover
+          background-color: $rust-dark
+          border-color: $rust-dark
+
+/* COLORS VIEW */
+.color-div
+    height: 200px
+
+.color-1
+  background-color: $black
+
+.color-2
+  background-color: $white
+
+.color-3
+  background-color: $secondary
+
+.color-4
+  background-color: $primary
+
+.color-5
+  background-color: $primary-dark
+
+.color-6
+  background-color: $rust
+
+/* FOOTER */
+footer
+  position: absolute
+  bottom: 0
+
+/* MEDIA QUERIES */
+@media screen and (max-width: 1024px)
+  img.bg
+    left: 50%
+    margin-left: -720px

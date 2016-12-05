@@ -1,19 +1,25 @@
 <template>
-  <div class="index-view">
-    <h1>Just pretend that there are views here...</h1>
-    <h2>...because this is where they go</h2>
-    <div class="test">
-      <p>test?</p>
+  <div class="index">
+    <img src="../assets/images/index-bg.jpg" class="bg" alt="tRUST">
+    <div class="overlay"></div>
+    <div class="index-content ink-grid clearfix">
+      <div class="column-group marketing push-right">
+        <h1 class="align-center">A Rust social networking resource</h1>
+        <h2 class="align-right">Login and group up today</h2>
+        <div class="button-wrapper align-right">
+          <button class="ink-button" type="button" name="login">login with Steam</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'index-view',
+  name: 'index',
   data () {
     return {
-      msg: 'Everyday you can noodling around with all your friends and family'
+      // msg: 'Everyday you can noodling around with all your friends and family'
     }
   }
 }
