@@ -7,7 +7,7 @@
         <h1 class="align-center">A Rust social networking resource</h1>
         <h2 class="align-right">Login and group up today</h2>
         <div class="button-wrapper align-right">
-          <button class="ink-button" type="button" name="login">login with Steam</button>
+          <button v-on:click="login" class="ink-button" type="button" name="login">login with Steam</button>
         </div>
       </div>
     </div>
@@ -20,6 +20,11 @@ export default {
   data () {
     return {
       // msg: 'Everyday you can noodling around with all your friends and family'
+    }
+  },
+  methods: {
+    login: function () {
+      this.$emit('login')
     }
   }
 }

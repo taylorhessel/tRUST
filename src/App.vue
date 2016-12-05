@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <nav-header></nav-header>
-    <router-view></router-view>
+    <nav-header v-on:login="loginUser"></nav-header>
+    <router-view v-on:login="loginUser"></router-view>
     <nav-footer></nav-footer>
   </div>
 </template>
@@ -19,6 +19,20 @@ export default {
     Index,
     Colors,
     NavFooter
+  },
+  data () {
+    return {
+      loggedInUser: {}
+    }
+  },
+  methods: {
+    loginUser: function () {
+      this.$http.get('http://pokeapi.co/api/v2/pokemon/151').then((response) => {
+        console.log(response)
+      }, (response) => {
+        // error callback
+      })
+    }
   }
 }
 </script>

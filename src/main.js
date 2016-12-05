@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import VueResource from 'vue-resource'
 import App from './App'
 
 Vue.use(VueRouter)
+Vue.use(VueResource)
 
 const homeView = App.components.Index
 const colors = App.components.Colors
@@ -20,5 +22,9 @@ const router = new VueRouter({
 new Vue({
   router,
   template: '<App/>',
-  components: { App }
+  components: { App },
+  data () {
+    return {}
+  },
+  computed: {}
 }).$mount('#app')

@@ -9,7 +9,7 @@
           <ul class="menu horizontal">
               <li><router-link to="/groups">join a group</router-link></li>
               <li><router-link to="/groups/create">create a group</router-link></li>
-              <li><button class="ink-button" type="button" name="button">login with Steam</button></li>
+              <li><button v-on:click="login" class="ink-button" type="button" name="button">login with Steam</button></li>
               <!--<li><router-link to="/colors">Colors</router-link></li>-->
           </ul>
         </div>
@@ -24,6 +24,11 @@ export default {
   data () {
     return {
       // msg: 'Welcome to Your Vue.js App'
+    }
+  },
+  methods: {
+    login: function () {
+      this.$emit('login')
     }
   }
 }
