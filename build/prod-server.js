@@ -1,18 +1,53 @@
+require('dotenv').config()
 require('./check-versions')()
 var config = require('../config')
 //if (!process.env.NODE_ENV) process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
 var path = require('path')
 var express = require('express')
+var session = require('express-session')
+var passport = require('passport')
+var SteamStrategy = require('passport-steam').Strategy
 var webpack = require('webpack')
 var opn = require('opn')
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = require('./webpack.prod.conf')
+
+var login = require('../routes/login')
+var logout = require('../routes/logout')
+var user = require('../routes/user')
 
 // default port where dev server listens for incoming traffic
 var port = process.env.PORT
 // Define HTTP proxies to your custom API backend
 // https://github.com/chimurai/http-proxy-middleware
 //var proxyTable = config.dev.proxyTable
+
+passport.serializeUser(function(user, done) {
+  done(null, user)
+})
+
+passport.deserializeUser(function(obj, done) {
+  done(null, obj)
+})
+
+passport.use(new SteamStrategy({
+    returnURL: 'https://trust-social-networking.herokuapp.com/login',
+    realm: 'https://trust-social-networking.herokuapp.com/',
+    apiKey: process.env.STEAM_API_KEY
+  },
+  function(identifier, profile, done) {
+    // asynchronous verification, for effect...
+    process.nextTick(function () {
+
+      // To keep the example simple, the user's Steam profile is returned to
+      // represent the logged-in user.  In a typical application, you would want
+      // to associate the Steam account with a user record in your database,
+      // and return that user instead.
+      profile.identifier = identifier
+      return done(null, profile)
+    })
+  }
+))
 
 var app = express()
 var compiler = webpack(webpackConfig)
@@ -42,6 +77,19 @@ compiler.plugin('compilation', function (compilation) {
 //   }
 //   app.use(proxyMiddleware(context, options))
 // })
+
+app.use(session({
+  secret: process.env.SECRET,
+  resave: true,
+  saveUninitialized: true
+}))
+
+app.use(passport.initialize())
+app.use(passport.session())
+
+app.use('/login', login)
+app.use('/logout', logout)
+app.use('/user', user)
 
 // handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')())

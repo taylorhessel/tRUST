@@ -12,9 +12,7 @@
 export default {
   name: 'nav-footer',
   data () {
-    return {
-      msg: 'Who the hell knows'
-    }
+    return {}
   }
 }
 </script>
