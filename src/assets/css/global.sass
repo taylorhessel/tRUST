@@ -12,6 +12,12 @@ header
   position: relative
   z-index: 1
 
+  nav.transparent
+    background-color: transparent
+
+  nav.solid
+    background-color: $primary
+
   a
     color: $white
 
@@ -34,8 +40,7 @@ header
         &:hover
           text-decoration: none
           color: $white
-      & li button
-        margin: 2.2em 0 2.2em 1em
+      & li a button
         background-color: $rust
         border-color: $rust
         color: $white
@@ -43,6 +48,16 @@ header
         &:hover
           background-color: $rust-dark
           border-color: $rust-dark
+      & li:last-child a
+        padding: 2.15em 0 2.15em 1em
+      li.user
+        line-height: 1.7
+        padding: 2.5em 0 2.5em 1em
+        font-size: 1em
+        font-variant: small-caps
+        color: $white
+        .logout
+          cursor: pointer
 
 /* INDEX VIEW */
 img.bg
@@ -91,6 +106,9 @@ img.bg
         &:hover
           background-color: $rust-dark
           border-color: $rust-dark
+
+/* CREATE VIEW */
+div.create
 
 /* COLORS VIEW */
 .color-div

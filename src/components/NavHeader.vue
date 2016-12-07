@@ -1,16 +1,16 @@
 <template>
   <header>
-    <nav>
-      <div class="ink-grid clearfix">
+    <nav v-bind:class="{ 'transparent': transparentNav, 'solid': !transparentNav }">
+      <div class="ink-grid clearfix navbar">
         <div class="column-group push-left">
           <router-link class="brand" to="/">tRUST</router-link>
         </div>
         <div class="ink-navigation column-group push-right">
           <ul class="menu horizontal">
-              <li><router-link to="/groups">join a group</router-link></li>
-              <li><router-link to="/groups/create">create a group</router-link></li>
-              <li><button v-on:click="login" class="ink-button" type="button" name="button">login with Steam</button></li>
-              <!--<li><router-link to="/colors">Colors</router-link></li>-->
+            <li><router-link to="/join">join a group</router-link></li>
+            <li><router-link to="/create">create a group</router-link></li>
+            <li v-if="!loggedIn"><a href="/login"><button class="ink-button" type="button" name="button">login with Steam</button></a></li>
+            <li class="user" v-else>Hello, {{steamUser.personaname}} <span v-on:click="logout" class="logout">(logout)</span></li>
           </ul>
         </div>
       </div>
@@ -23,12 +23,13 @@ export default {
   name: 'nav-header',
   data () {
     return {
-      // msg: 'Welcome to Your Vue.js App'
+
     }
   },
+  props: ['steamUser', 'loggedIn', 'transparentNav'],
   methods: {
-    login: function () {
-      this.$emit('login')
+    logout: function () {
+      this.$emit('logout')
     }
   }
 }

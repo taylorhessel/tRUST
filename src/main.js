@@ -7,10 +7,14 @@ Vue.use(VueRouter)
 Vue.use(VueResource)
 
 const homeView = App.components.Index
+const createView = App.components.Create
+const joinView = App.components.Join
 const colors = App.components.Colors
 
 const routes = [
   {path: '/', component: homeView},
+  {path: '/create', component: createView},
+  {path: '/join', component: joinView},
   {path: '/colors', component: colors}
 ]
 
@@ -24,7 +28,8 @@ new Vue({
   template: '<App/>',
   components: { App },
   data () {
-    return {}
-  },
-  computed: {}
+    return {
+
+    }
+  }
 }).$mount('#app')

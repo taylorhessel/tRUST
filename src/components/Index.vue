@@ -6,8 +6,8 @@
       <div class="column-group marketing push-right">
         <h1 class="align-center">A Rust social networking resource</h1>
         <h2 class="align-right">Login and group up today</h2>
-        <div class="button-wrapper align-right">
-          <button v-on:click="login" class="ink-button" type="button" name="login">login with Steam</button>
+        <div v-if="!loggedIn" class="button-wrapper align-right">
+          <a href="/login"><button class="ink-button" type="button" name="login">login with Steam</button></a>
         </div>
       </div>
     </div>
@@ -18,14 +18,11 @@
 export default {
   name: 'index',
   data () {
-    return {
-      // msg: 'Everyday you can noodling around with all your friends and family'
-    }
+    return {}
   },
-  methods: {
-    login: function () {
-      this.$emit('login')
-    }
+  props: ['loggedIn'],
+  created () {
+    this.$emit('transparency', true)
   }
 }
 </script>
