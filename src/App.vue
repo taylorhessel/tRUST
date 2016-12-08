@@ -2,7 +2,7 @@
   <div id="app">
     <nav-header  v-bind:transparentNav="transparentNav" v-on:logout="logoutUser" v-bind:steamUser="steamUser" v-bind:loggedIn="loggedIn"></nav-header>
     <router-view v-on:transparency="setTransparency" v-bind:steamUser="steamUser" v-bind:loggedIn="loggedIn"></router-view>
-    <nav-footer></nav-footer>
+    <!--<nav-footer></nav-footer>-->
   </div>
 </template>
 
@@ -48,7 +48,6 @@ export default {
   created () {
     this.$http.get('https://trust-social-networking.herokuapp.com/user').then((response) => {
       if (response.body._json.steamid) {
-        console.log(response.body._json.steamid)
         this.steamUser = response.body._json
         this.loggedIn = true
       }

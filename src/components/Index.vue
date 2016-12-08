@@ -1,8 +1,8 @@
 <template>
-  <div class="index">
+  <div class="view index">
     <img src="../assets/images/index-bg.jpg" class="bg" alt="tRUST">
     <div class="overlay"></div>
-    <div class="index-content ink-grid clearfix">
+    <div class="index-content view ink-grid clearfix">
       <div class="column-group marketing push-right">
         <h1 class="align-center">A Rust social networking resource</h1>
         <h2 class="align-right">Login and group up today</h2>

@@ -1,3 +1,9 @@
+html
+  height: 100%
+
+body
+  height: 100%
+
 /* COLOR VARS */
 $black: hsla(224%, 14%, 22%, 1)
 $white: hsla(240%, 100%, 99%, 1)
@@ -59,6 +65,11 @@ header
         .logout
           cursor: pointer
 
+/* VIEW */
+.view
+  min-height: 100%
+  padding-bottom: 50px
+
 /* INDEX VIEW */
 img.bg
   min-height: 100%
@@ -109,6 +120,35 @@ img.bg
 
 /* CREATE VIEW */
 div.create
+  margin-top: 2em
+
+  h2
+    color: $black
+
+  form
+
+    .ink-button
+      font-variant: small-caps
+      background-color: $rust
+      border-color: $rust
+      color: $white
+      margin: 5px 0 0
+      &:hover
+        background-color: $rust-dark
+        border-color: $rust-dark
+
+/* JOIN VIEW */
+div.join
+  margin-top: 2em
+
+  h2
+    color: $black
+
+  .discord
+    width: 40px
+
+  .avatar
+    width: 60px
 
 /* COLORS VIEW */
 .color-div
@@ -134,8 +174,8 @@ div.create
 
 /* FOOTER */
 footer
-  position: absolute
-  bottom: 0
+  height: 50px
+  margin-top: 50px
 
 /* MEDIA QUERIES */
 @media screen and (max-width: 1024px)
