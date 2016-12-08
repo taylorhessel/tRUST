@@ -35,7 +35,7 @@ export default {
     logoutUser: function () {
       this.steamUser = null
       this.loggedIn = false
-      this.$http.get('hhttps://trust-social-networking.herokuapp.com/logout').then((response) => {
+      this.$http.get('https://trust-social-networking.herokuapp.com/logout').then((response) => {
         console.log(response.body.message)
       }, (response) => {
         console.log('user was not logged out')
