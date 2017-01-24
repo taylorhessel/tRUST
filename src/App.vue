@@ -2,7 +2,6 @@
   <div id="app">
     <nav-header  v-bind:transparentNav="transparentNav" v-on:logout="logoutUser" v-bind:steamUser="steamUser" v-bind:loggedIn="loggedIn"></nav-header>
     <router-view v-on:transparency="setTransparency" v-bind:steamUser="steamUser" v-bind:loggedIn="loggedIn"></router-view>
-    <!--<nav-footer></nav-footer>-->
   </div>
 </template>
 
@@ -12,7 +11,6 @@ import Index from './components/Index'
 import Create from './components/Create'
 import Join from './components/Join'
 import Colors from './components/Colors'
-import NavFooter from './components/NavFooter'
 
 export default {
   name: 'App',
@@ -21,8 +19,7 @@ export default {
     Index,
     Create,
     Join,
-    Colors,
-    NavFooter
+    Colors
   },
   data () {
     return {
