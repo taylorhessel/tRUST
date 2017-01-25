@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <nav-header  v-bind:transparentNav="transparentNav" v-on:logout="logoutUser" v-bind:steamUser="steamUser" v-bind:loggedIn="loggedIn"></nav-header>
-    <router-view v-on:transparency="setTransparency" v-bind:steamUser="steamUser" v-bind:loggedIn="loggedIn"></router-view>
+    <nav-header :transparentNav="transparentNav" @logout="logoutUser" :steamUser="steamUser" :loggedIn="loggedIn"></nav-header>
+    <router-view @transparency="setTransparency" :steamUser="steamUser" :loggedIn="loggedIn"></router-view>
   </div>
 </template>
 
@@ -32,9 +32,9 @@ export default {
     logoutUser: function () {
       this.steamUser = null
       this.loggedIn = false
-      this.$http.get('https://trust-social-networking.herokuapp.com/logout').then((response) => {
-        console.log(response.body.message)
-      }, (response) => {
+      this.$http.get('https://trust-social-networking.herokuapp.com/logout').then((res) => {
+        console.log(res.body.message)
+      }, (rej) => {
         console.log('user was not logged out')
       })
     },
@@ -43,13 +43,13 @@ export default {
     }
   },
   created () {
-    this.$http.get('https://trust-social-networking.herokuapp.com/user').then((response) => {
-      if (response.body._json.steamid) {
-        this.steamUser = response.body._json
+    this.$http.get('https://trust-social-networking.herokuapp.com/user').then((res) => {
+      if (res.body._json.steamid) {
+        this.steamUser = res.body._json
         this.loggedIn = true
       }
-    }, (response) => {
-      console.log('user logged in')
+    }, (rej) => {
+      console.log('user not logged in')
     })
   }
 }

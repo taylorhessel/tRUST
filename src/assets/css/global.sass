@@ -127,6 +127,22 @@ div.create
 
   form
 
+    span.asterisk
+      color: $rust-dark
+
+    input.input-is-danger
+      border-color: $rust-dark
+      &:focus
+        border-color: $rust-dark
+
+    .is-danger
+      color: $rust-dark
+
+    select
+      height: 41px
+      option.hidden
+        display: none
+
     .ink-button
       font-variant: small-caps
       background-color: $rust
@@ -136,6 +152,9 @@ div.create
       &:hover
         background-color: $rust-dark
         border-color: $rust-dark
+
+    .reset
+      margin-left: 0.5em
 
 /* JOIN VIEW */
 div.join
