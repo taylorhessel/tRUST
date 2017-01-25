@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
+import VeeValidate from 'vee-validate'
 import App from './App'
 
 Vue.use(VueRouter)
 Vue.use(VueResource)
+Vue.use(VeeValidate)
 
 const homeView = App.components.Index
 const createView = App.components.Create
@@ -28,8 +30,6 @@ new Vue({
   template: '<App/>',
   components: { App },
   data () {
-    return {
-
-    }
+    return {}
   }
 }).$mount('#app')
