@@ -32,6 +32,7 @@ export default {
     logoutUser: function () {
       this.steamUser = null
       this.loggedIn = false
+      // this.$http.get('http://localhost:8080/logout').then((res) => {
       this.$http.get('https://trust-social-networking.herokuapp.com/logout').then((res) => {
         console.log(res.body.message)
       }, (rej) => {
@@ -43,6 +44,7 @@ export default {
     }
   },
   created () {
+    // this.$http.get('http://localhost:8080/user').then((res) => {
     this.$http.get('https://trust-social-networking.herokuapp.com/user').then((res) => {
       if (res.body._json.steamid) {
         this.steamUser = res.body._json

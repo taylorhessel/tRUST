@@ -124,6 +124,7 @@ div.create
 
   h2
     color: $black
+    margin-bottom: 0.33em
 
   form
 
@@ -155,6 +156,10 @@ div.create
 
     .reset
       margin-left: 0.5em
+
+  span.login-error
+    display: block
+    margin-bottom: 0.75em
 
 /* JOIN VIEW */
 div.join
@@ -191,13 +196,15 @@ div.join
 .color-6
   background-color: $rust
 
-/* FOOTER */
-footer
-  height: 50px
-  margin-top: 50px
-
 /* MEDIA QUERIES */
 @media screen and (max-width: 1024px)
   img.bg
     left: 50%
     margin-left: -720px
+
+/* ANIMATIONS */
+.fade-enter-active, .fade-leave-active
+  transition: opacity .5s
+
+.fade-enter, .fade-leave
+  opacity: 0
