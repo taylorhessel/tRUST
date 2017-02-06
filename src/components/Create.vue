@@ -3,27 +3,34 @@
     <div class="ink-grid">
       <div class="column-group large-50 large-push-center xlarge-50 xlarge-push-center">
         <h2>Create a group</h2>
+        <h5>Users must be logged in with Steam to create a group</h5>
         <form novalidate class="ink-form" action="/create" method="post" @submit.prevent="submit">
             <div class="column-group">
                 <div class="control-group">
                     <label for="serverName">Server Name <span class="asterisk">*</span></label>
                     <div class="control">
-                        <input v-validate="'required|max:50'" :class="{'input-is-danger': errors.has('serverName')}" type="text" name="serverName" data-vv-as="server name" id="serverName" placeholder="Rusty Moose">
-                        <span v-show="errors.has('serverName')" class="is-danger">{{ errors.first('serverName') }}</span>
+                        <input v-validate="'required|max:50'" type="text" name="serverName" data-vv-as="server name" id="serverName" placeholder="Rusty Moose">
+                        <transition name="fade">
+                          <span v-show="errors.has('serverName')" class="is-danger">{{ errors.first('serverName') }}</span>
+                        </transition>
                     </div>
                 </div>
                 <div class="control-group">
                     <label for="groupSize">Maximum Group Size <span class="asterisk">*</span></label>
                     <div class="control">
-                        <input v-validate="'required|between:1,20'" :class="{'input-is-danger': errors.has('groupSize')}" type="text" name="groupSize" data-vv-as="group size" id="groupSize" placeholder="5">
-                        <span v-show="errors.has('groupSize')" class="is-danger">{{ errors.first('groupSize') }}</span>
+                        <input v-validate="'required|between:1,20'" type="text" name="groupSize" data-vv-as="group size" id="groupSize" placeholder="5">
+                        <transition name="fade">
+                          <span v-show="errors.has('groupSize')" class="is-danger">{{ errors.first('groupSize') }}</span>
+                        </transition>
                     </div>
                 </div>
                 <div class="control-group">
                     <label for="activeHours">Active Hours <span class="asterisk">*</span></label>
                     <div class="control">
-                        <input v-validate="'required|max:50'" :class="{'input-is-danger': errors.has('activeHours')}" type="text" name="activeHours" data-vv-as="active hours" id="activeHours" placeholder="MWF, 5:30pm EST">
-                        <span v-show="errors.has('activeHours')" class="is-danger">{{ errors.first('activeHours') }}</span>
+                        <input v-validate="'required|max:50'" type="text" name="activeHours" data-vv-as="active hours" id="activeHours" placeholder="MWF, 5:30pm EST">
+                        <transition name="fade">
+                          <span v-show="errors.has('activeHours')" class="is-danger">{{ errors.first('activeHours') }}</span>
+                        </transition>
                     </div>
                 </div>
                 <div class="control-group">
@@ -46,8 +53,13 @@
                     </div>
                 </div>
             </div>
-            <button class="ink-button" type="submit">Submit</button>
-            <button @click="clearErrors" class="ink-button reset" type="reset">Reset</button>
+            <transition name="fade">
+              <span v-show="loggedInError" class="is-danger login-error">Login with Steam to create a group.</span>
+            </transition>
+            <div class="button-group">
+              <button class="ink-button" type="submit">Submit</button>
+              <button @click="clearErrors" class="ink-button reset" type="reset">Reset</button>
+            </div>
         </form>
       </div>
     </div>
@@ -58,7 +70,9 @@
 export default {
   name: 'create',
   data () {
-    return {}
+    return {
+      loggedInError: false
+    }
   },
   props: ['loggedIn'],
   methods: {
@@ -66,13 +80,19 @@ export default {
       this.$emit('login')
     },
     submit: function () {
-      this.$validator.validateAll().then((res) => {
-        if (res) {
-          console.log('validation passed')
-        }
-      })
+      if (!this.loggedIn) {
+        this.loggedInError = true
+      }
+      if (this.loggedIn) {
+        this.$validator.validateAll().then((res) => {
+          if (res) {
+            console.log('validation passed')
+          }
+        })
+      }
     },
     clearErrors: function () {
+      this.loggedInError = false
       this.errors.clear()
     }
   },
