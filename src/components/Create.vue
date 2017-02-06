@@ -56,10 +56,8 @@
             <transition name="fade">
               <span v-show="loggedInError" class="is-danger login-error">Login with Steam to create a group.</span>
             </transition>
-            <div class="button-group">
-              <button class="ink-button" type="submit">Submit</button>
-              <button @click="clearErrors" class="ink-button reset" type="reset">Reset</button>
-            </div>
+            <button class="ink-button" type="submit">Submit</button>
+            <button @click="clearErrors" class="ink-button reset" type="reset">Reset</button>
         </form>
       </div>
     </div>
