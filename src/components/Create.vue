@@ -9,7 +9,7 @@
                 <div class="control-group">
                     <label for="serverName">Server Name <span class="asterisk">*</span></label>
                     <div class="control">
-                        <input v-validate="'required|max:50'" type="text" name="serverName" data-vv-as="server name" id="serverName" placeholder="Rusty Moose">
+                        <input v-model="serverName" v-validate="'required|max:50'" type="text" name="serverName" data-vv-as="server name" id="serverName" placeholder="Rusty Moose">
                         <transition name="fade">
                           <span v-show="errors.has('serverName')" class="is-danger">{{ errors.first('serverName') }}</span>
                         </transition>
@@ -18,7 +18,7 @@
                 <div class="control-group">
                     <label for="groupSize">Maximum Group Size <span class="asterisk">*</span></label>
                     <div class="control">
-                        <input v-validate="'required|between:1,20'" type="text" name="groupSize" data-vv-as="group size" id="groupSize" placeholder="5">
+                        <input v-model="groupSize" v-validate="'required|between:1,20'" type="text" name="groupSize" data-vv-as="group size" id="groupSize" placeholder="5">
                         <transition name="fade">
                           <span v-show="errors.has('groupSize')" class="is-danger">{{ errors.first('groupSize') }}</span>
                         </transition>
@@ -27,7 +27,7 @@
                 <div class="control-group">
                     <label for="activeHours">Active Hours <span class="asterisk">*</span></label>
                     <div class="control">
-                        <input v-validate="'required|max:50'" type="text" name="activeHours" data-vv-as="active hours" id="activeHours" placeholder="MWF, 5:30pm EST">
+                        <input v-model="activeHours" v-validate="'required|max:50'" type="text" name="activeHours" data-vv-as="active hours" id="activeHours" placeholder="MWF, 5:30pm EST">
                         <transition name="fade">
                           <span v-show="errors.has('activeHours')" class="is-danger">{{ errors.first('activeHours') }}</span>
                         </transition>
@@ -36,19 +36,15 @@
                 <div class="control-group">
                     <label for="playstyle">Playstyle</label>
                     <div class="control">
-                        <select class="" name="playstyle">
-                          <option selected value></option>
-                          <option value="pvp">PvP</option>
-                          <option value="roleplay">Roleplaying</option>
-                          <option value="casual">Casual</option>
-                          <option value="creative">Creative</option>
+                        <select v-model="selected" name="playstyle">
+                          <option v-for="option in options" :value="option.value">{{option.text}}</option>
                         </select>
                     </div>
                 </div>
                 <div class="control-group">
                     <label for="discord">Discord Instant Invite</label>
                     <div class="control">
-                        <input v-validate="{ rules: { regex: /^https:\/\/discord.gg\/[A-Za-z0-9]{5,16}$/}}" :class="{'input-is-danger': errors.has('discord')}" type="text" name="discord" data-vv-as="discord instant invite" id="discord">
+                        <input v-model="discord" v-validate="{ rules: { regex: /^https:\/\/discord.gg\/[A-Za-z0-9]{5,16}$/}}" :class="{'input-is-danger': errors.has('discord')}" type="text" name="discord" data-vv-as="discord instant invite" id="discord">
                         <span v-show="errors.has('discord')" class="is-danger">{{ errors.first('discord') }}</span>
                     </div>
                 </div>
@@ -69,10 +65,22 @@ export default {
   name: 'create',
   data () {
     return {
-      loggedInError: false
+      loggedInError: false,
+      serverName: '',
+      groupSize: undefined,
+      activeHours: '',
+      selected: '',
+      options: [
+        {text: '', value: undefined},
+        {text: 'PvP', value: 'PvP'},
+        {text: 'Roleplaying', value: 'Roleplaying'},
+        {text: 'Casual', value: 'Casual'},
+        {text: 'Creative', value: 'Creative'}
+      ],
+      discord: ''
     }
   },
-  props: ['loggedIn'],
+  props: ['loggedIn', 'steamUser'],
   methods: {
     login: function () {
       this.$emit('login')
@@ -84,7 +92,22 @@ export default {
       if (this.loggedIn) {
         this.$validator.validateAll().then((res) => {
           if (res) {
-            console.log('validation passed')
+            let groupData = {
+              serverName: this.serverName,
+              groupSize: parseInt(this.groupSize),
+              activeHours: this.activeHours,
+              playstyle: this.selected,
+              discord: this.discord,
+              creator: this.steamUser.personaname,
+              profileurl: this.steamUser.profileurl,
+              avatar: this.steamUser.avatarfull
+            }
+            this.$http.post('http://localhost:8080/groups', groupData, {
+            // this.$http.post('https://trust-social-networking.herokuapp.com/groups', groupData, {
+              emulateJSON: true
+            }).then((res) => {
+              console.log(res)
+            })
           }
         })
       }

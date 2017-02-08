@@ -11,10 +11,12 @@ var webpack = require('webpack')
 var opn = require('opn')
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = require('./webpack.prod.conf')
+var bodyParser = require('body-parser')
 
 var login = require('../routes/login')
 var logout = require('../routes/logout')
 var user = require('../routes/user')
+var groups = require('../routes/groups')
 
 // default port where dev server listens for incoming traffic
 var port = process.env.PORT
@@ -78,6 +80,9 @@ compiler.plugin('compilation', function (compilation) {
 //   app.use(proxyMiddleware(context, options))
 // })
 
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
 app.use(session({
   secret: process.env.SECRET,
   resave: true,
@@ -90,6 +95,7 @@ app.use(passport.session())
 app.use('/login', login)
 app.use('/logout', logout)
 app.use('/user', user)
+app.use('/groups', groups)
 
 // handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')())

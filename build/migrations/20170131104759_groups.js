@@ -5,7 +5,7 @@ exports.up = function(knex, Promise) {
       table.string('creator_url')
       table.string('creator_avatar')
       table.string('server_name')
-      table.string('group_size')
+      table.integer('group_size')
       table.string('active_hours')
       table.string('playstyle')
       table.string('discord')
