@@ -5,7 +5,7 @@ function getGroups() {
 }
 
 function addGroup(group) {
-  return knex('groups').insert({
+  return knex('groups').returning('id').insert({
     creator_name: group.creator,
     creator_url: group.profileurl,
     creator_avatar: group.avatar,

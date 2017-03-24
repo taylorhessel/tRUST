@@ -2,6 +2,7 @@ require('dotenv').config()
 require('./check-versions')()
 var config = require('../config')
 //if (!process.env.NODE_ENV) process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
+var favicon = require('serve-favicon')
 var path = require('path')
 var express = require('express')
 var session = require('express-session')
@@ -80,6 +81,7 @@ compiler.plugin('compilation', function (compilation) {
 //   app.use(proxyMiddleware(context, options))
 // })
 
+app.use(favicon(path.join(__dirname, 'public', 'favicon.png')))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
