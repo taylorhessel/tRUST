@@ -1,7 +1,7 @@
 <template>
   <div class="view create">
     <div class="ink-grid">
-      <div class="column-group large-50 large-push-center xlarge-50 xlarge-push-center">
+      <div class="column-group medium-75 medium-push-center large-50 large-push-center xlarge-50 xlarge-push-center">
         <h2>Create a group</h2>
         <h5>Users must be logged in with Steam to create a group</h5>
         <form novalidate class="ink-form" action="/create" method="post" @submit.prevent="submit">
@@ -50,7 +50,13 @@
                 </div>
             </div>
             <transition name="fade">
-              <span v-show="loggedInError" class="is-danger login-error">Login with Steam to create a group.</span>
+              <span v-show="loggedInError" class="ink-alert basic error status">Login with Steam to create a group.</span>
+            </transition>
+            <transition name="fade">
+              <span v-show="formSubmitSuccess" class="ink-alert basic success status">Group created successfully!</span>
+            </transition>
+            <transition name="fade">
+              <span v-show="formSubmitFailure" class="ink-alert basic error status">Failed to create group, please try again.</span>
             </transition>
             <button class="ink-button" type="submit">Submit</button>
             <button @click="clearErrors" class="ink-button reset" type="reset">Reset</button>
@@ -66,6 +72,8 @@ export default {
   data () {
     return {
       loggedInError: false,
+      formSubmitSuccess: false,
+      formSubmitFailure: false,
       serverName: '',
       groupSize: undefined,
       activeHours: '',
@@ -79,6 +87,9 @@ export default {
       ],
       discord: ''
     }
+  },
+  metaInfo: {
+    title: 'tRUST - Create a Group'
   },
   props: ['loggedIn', 'steamUser'],
   methods: {
@@ -102,11 +113,22 @@ export default {
               profileurl: this.steamUser.profileurl,
               avatar: this.steamUser.avatarfull
             }
-            this.$http.post('http://localhost:8080/groups', groupData, {
-            // this.$http.post('https://trust-social-networking.herokuapp.com/groups', groupData, {
+            // this.$http.post('http://localhost:8080/groups', groupData, {
+            this.$http.post('https://trust-social-networking.herokuapp.com/groups', groupData, {
               emulateJSON: true
             }).then((res) => {
-              console.log(res)
+              if (res.status === 200) {
+                this.formSubmitSuccess = true
+                setTimeout(() => {
+                  this.formSubmitSuccess = false
+                  this.resetForm()
+                }, 3000)
+              } else {
+                this.formSubmitFailure = true
+                setTimeout(() => {
+                  this.formSubmitFailure = false
+                }, 3000)
+              }
             })
           }
         })
@@ -115,6 +137,13 @@ export default {
     clearErrors: function () {
       this.loggedInError = false
       this.errors.clear()
+    },
+    resetForm: function () {
+      this.serverName = ''
+      this.groupSize = undefined
+      this.activeHours = ''
+      this.selected = ''
+      this.discord = ''
     }
   },
   created () {

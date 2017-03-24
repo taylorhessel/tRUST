@@ -1,3 +1,5 @@
+@import "../../../node_modules/hamburgers/_sass/hamburgers/hamburgers.scss"
+
 html
   height: 100%
 
@@ -10,8 +12,10 @@ $white: hsla(240%, 100%, 99%, 1)
 $secondary: hsla(257%, 100%, 93%, 1)
 $primary: hsla(228%, 46%, 28%, 1)
 $primary-dark: hsla(227%, 42%, 20%, 1)
+$primary-dark-hover: hsla(227%, 42%, 16%, 1)
 $rust: hsla(8%, 65%, 49%, 1)
 $rust-dark: hsla(8%, 65%, 45%, 1)
+$error: hsla(0%, 64%, 33%, 1)
 
 /* HEADER */
 header
@@ -38,9 +42,15 @@ header
       color: $white
 
   .ink-navigation
+    button.hamburger
+      margin: 38px 0 0
+      &:focus
+        outline: none
+
     ul.menu.horizontal
       li a
-        padding: 2.5em 1em
+        margin: 2.5em 1em
+        padding: 0
         font-size: 1em
         font-variant: small-caps
         &:hover
@@ -55,15 +65,38 @@ header
           background-color: $rust-dark
           border-color: $rust-dark
       & li:last-child a
-        padding: 2.15em 0 2.15em 1em
+        margin: 2.15em 0 2.15em 1em
+        padding: 0
       li.user
         line-height: 1.7
-        padding: 2.5em 0 2.5em 1em
+        margin: 2.5em 0 2.5em 1em
+        padding: 0
         font-size: 1em
         font-variant: small-caps
         color: $white
         .logout
           cursor: pointer
+
+  .ink-navigation.mobile
+    ul.menu.horizontal
+      margin-bottom: 20px
+      li
+        float: none
+        a
+          margin: 0 0 0.25em 0
+          padding: 0
+          font-size: 1em
+          font-variant: small-caps
+          &:hover
+            text-decoration: none
+            color: $white
+      & li:last-child a
+        margin: 0
+        padding: 0
+      li.user
+        line-height: 1.7
+        margin: 0
+        padding: 0
 
 /* VIEW */
 .view
@@ -96,15 +129,19 @@ img.bg
   z-index: 1
 
   .marketing
+    float: right
     margin: 4em
 
     h1
+      text-align: center
       color: $white
 
     h2
+      text-align: right
       color: $white
 
     .button-wrapper
+      text-align: right
       margin-top: 3em
 
       button
@@ -129,15 +166,15 @@ div.create
   form
 
     span.asterisk
-      color: $rust-dark
+      color: #891e1e
 
     input.input-is-danger
-      border-color: $rust-dark
+      border-color: $error
       &:focus
-        border-color: $rust-dark
+        border-color: $error
 
     .is-danger
-      color: $rust-dark
+      color: $error
 
     select
       height: 41px
@@ -157,16 +194,18 @@ div.create
     .reset
       margin-left: 0.5em
 
-  span.login-error
+  span.status
     display: block
+    margin-top: 0
     margin-bottom: 0.75em
 
-/* JOIN VIEW */
-div.join
+/* GROUPS VIEW */
+div.groups
   margin-top: 2em
 
   h2
     color: $black
+    margin-bottom: 0.33em
 
   .discord
     width: 40px
@@ -197,6 +236,15 @@ div.join
   background-color: $rust
 
 /* MEDIA QUERIES */
+@media screen and (max-width: 960px)
+  .index-content
+    .marketing
+      float: none
+      h1, h2
+        text-align: center
+      .button-wrapper
+        text-align: center
+
 @media screen and (max-width: 1024px)
   img.bg
     left: 50%
